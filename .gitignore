@@ -56,3 +56,12 @@ target/
 local_settings.py
 .idea
 .DS_Store
+
+.idea/
+*.pyc
+DS_Store
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
