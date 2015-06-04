@@ -4,11 +4,60 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-
-
+    <link href="{% static 'blog/css/bootstrap.min.css' %}" />
 </head>
-<body ng-app="angularApp">
-    <div ng-view></div>
+<body>
+<!--     <div ng-view></div> --> 
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'email_signup' %}"></a></li>
+            </ul>
+            <h3 class="text-muted">My Blog</h3>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-10">
+                {% block main %}{% endblock main %}
+            </div>
+
+            <div class="col-md-2">
+                <div>Blog tags go here!</div>
+                {% for tag in tags %}
+                <p>{{ tag.posts.count }}
+                    <span class="label label-info"><a href='{% url 'filter_tags' tag.name %}'>{{ tag.name }}</a></span>
+                    <a href='{% url 'filter_tags' tag.name %}'></a>
+                </p>
+                {% endfor %}
+                <hr>
+                {% for month, count in month_count.iteritems %}
+                    <p>{{ month }}: {{ count }}</p>
+                {% endfor %}
+                <hr>
+                    {{ year_count.1.0 }}
+                    {% for month, count in year_count.1.0.iteritems %}
+                        <p>{{ month }} {{ count }}</p>
+                    {% endfor %}
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12">Latest blog post goes here!</div>
+            
+            <hr>
+
+            <div class="footer">
+                <div class="pull-right">Welcome user from {{ location }}!</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Angular -->
     <script src="{% static 'blog/js/lib/angular.min.js' %}"></script>
